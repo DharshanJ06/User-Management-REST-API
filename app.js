@@ -7,13 +7,11 @@ const User = require("./models/User");
 const app = express();
 app.use(express.json());
 
-// DB connection
 mongoose.connect("mongodb://127.0.0.1:27017/userdb")
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.error(err));
 
 
-// GET all users
 app.get("/users", async (req, res) => {
   try {
     const users = await User.find();
@@ -27,7 +25,7 @@ app.get("/users", async (req, res) => {
 });
 
 
-// GET user by ID
+
 app.get("/users/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -44,7 +42,7 @@ app.get("/users/:id", async (req, res) => {
 });
 
 
-// POST create user
+
 app.post("/users", async (req, res) => {
   try {
     const { name, age, email, password } = req.body;
@@ -71,7 +69,7 @@ app.post("/users", async (req, res) => {
 });
 
 
-// PUT update user
+
 app.put("/users/:id", async (req, res) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(
@@ -92,7 +90,6 @@ app.put("/users/:id", async (req, res) => {
 });
 
 
-// DELETE user
 app.delete("/users/:id", async (req, res) => {
   try {
     const deletedUser = await User.findByIdAndDelete(req.params.id);
